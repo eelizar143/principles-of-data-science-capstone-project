@@ -14,20 +14,21 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, roc_auc_score
 from sklearn.decomposition import PCA
 
-#making n_number variable my N # and using it for random states
+# Using unique number for random seeding
 n_number = 17971719
 random.seed(n_number)
 
-# Using pandas, since numpy seemed to have encoding issues
+# Read in data
 data = pd.read_csv('spotify52kData.csv',delimiter=',')
 
+# Getting features into one matrix:
+# 10 features = duration, danceability, energy, loudness, speechiness, acousticness, instrumentalness, liveness, valence and tempo.
 
-#Getting features for question 1 and other questions into one matrix
 feats = data.iloc[:, [5, 7, 8, 10, 12, 13, 14, 15, 16, 17]]
 num_col = feats.shape[1]
 
 
-#Plotted each of the features with overlay separately 
+#Plotted each of the features with normal distribution overlay separately 
 #since they all need different labels for x axes
 
 dur = feats.iloc[:, 0]
@@ -161,7 +162,8 @@ plt.xlabel("Tempo")
 plt.ylabel("Frequency")
 plt.show()
 
-#QUESTION 2 -------------------------------------------------------------
+# Is there a relationship between song length and popularity? -------------------------------------------------------------
+
 len_pop = data.iloc[:, [5, 4]]
 length = len_pop.iloc[:, 0]
 popularity = len_pop.iloc[:, 1]
@@ -182,7 +184,7 @@ exp_pop = data.iloc[:, [6, 4]]
 exp = exp_pop.iloc[:, 0]
 pop = exp_pop.iloc[:, 1]
 
-#QUESTION 3 -------------------------------------------------------------
+# Are explicitly rated songs more popular than songs that are not explicit? -------------------------------------------------------------
 
 popularity_explicit = []
 popularity_non_explicit= []
@@ -202,7 +204,7 @@ print("p-value:", p)
 print('')
 
 
-#QUESTION 4 -------------------------------------------------------------
+# Are songs in major key more popular than songs in minor key? -------------------------------------------------------------
 
 mode_pop = data.iloc[:, [11, 4]]
 
@@ -229,7 +231,7 @@ print('')
 
 
 
-#QUESTION 5 -------------------------------------------------------------
+#QUESTION 5 Does energy largely reflect the "loudness" of a song? Using a scatterplot. --------------------------------------------------------
 
 en_loud = data.iloc[:, [8, 10]]
 ins = feats.iloc[:, 6]
@@ -253,7 +255,7 @@ print("Correlation coefficient:", corr_coef)
 print('')
 
 
-#QUESTION 6 -------------------------------------------------------------
+# Which of the 10 individual (single) song features predicts popularity best?
 
 
 for i in range(feats.shape[1]):
@@ -271,7 +273,8 @@ for i in range(feats.shape[1]):
 
 print('')
 
-##QUESTION 7 -------------------------------------------------------------
+# Building a model that uses *all* of the 10 song features, how well can I predict popularity now? ---------------------------------------
+
 '''The n_number for this question and 
 all future questions with a train/test split 
 is my random seed from the beginning'''
@@ -310,7 +313,7 @@ rmse = np.sqrt(mean_squared_error(y_test, y_pred))
 #print("Root Mean Squared Error on test set:", rmse)
 #print("Score", final_model.score(X_test, y_test))
 
-#QUESTION 8 -------------------------------------------------------------
+# When considering the 10 song features above, how many meaningful principal components can I extract? -----------------------------------------
 
 feats_z = stats.zscore(feats)
 feats_pca = PCA().fit(feats_z)
@@ -329,7 +332,7 @@ print("Proportion of variance explained:", proportion_variance_explained)
 print('')
 
 
-#QUESTION 9 -------------------------------------------------------------
+# Can I predict whether a song is in major or minor key from valence? How good is this prediction and is there a better predictor? ------------
 X = data.iloc[:,16].values.reshape(-1, 1) 
 y = data.iloc[:,11]
 
@@ -392,7 +395,7 @@ print("AUC for danceability and mode:", auc)
 print('')
 
 
-#QUESTION 10 -------------------------------------------------------------
+# Which is a better predictor of whether a song is classical music – duration or the principal components you extracted  earlier? --------------
 
 genre = data.iloc[:, 19]
 binary_encoded = [1 if label == 'classical' else 0 for label in genre]
