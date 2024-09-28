@@ -231,7 +231,7 @@ print('')
 
 
 
-#QUESTION 5 Does energy largely reflect the "loudness" of a song? Using a scatterplot. --------------------------------------------------------
+# Does energy largely reflect the "loudness" of a song? Using a scatterplot to see this. --------------------------------------------------------
 
 en_loud = data.iloc[:, [8, 10]]
 ins = feats.iloc[:, 6]
