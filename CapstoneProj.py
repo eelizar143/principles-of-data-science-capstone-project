@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
  
+import random
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy import stats
 from scipy.stats import norm
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.utils import resample
-from sklearn.metrics import mean_squared_error
-import random
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, classification_report, roc_auc_score
+from sklearn.metrics import mean_squared_error, accuracy_score, classification_report, roc_auc_score
 from sklearn.decomposition import PCA
 
 # Using unique number for random seeding
