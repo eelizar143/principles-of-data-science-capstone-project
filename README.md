@@ -3,7 +3,7 @@
 
 
 ## Project Description: 
-* Using a set of 52,000 songs from Spotify, I conducted an analysis to better understand what features of songs tends to make them more popular, test hypotheses relating to the affect of these features on popularity, and reduce dimensionality of song features to predict key musical attributes.
+* Using a dataset of 52,000 songs from Spotify, I analyzed the relationships between song features and popularity, tested hypotheses on how these features influence popularity, and applied dimensionality reduction to predict key musical attributes.
 
 ### Features Analyzed
 The dataset includes 10 key song attributes:
